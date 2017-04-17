@@ -211,11 +211,19 @@ def get_raw_geo_data(geo, sumLvls):
         sumLvlStrs.append(str(code).zfill(3))
     geoCodes = []
     inFileName = os.getcwd() + "/data/2015_5yr_geo/2015_ACS_Geography_Files/g20155" + geo + ".csv"
-    with open(inFileName, 'r', newline='') as inFile:
-        reader = csv.reader(inFile, delimiter=',', quotechar='"')
-        for row in reader:
-            if row[2] in sumLvlStrs:
-                geoCodes.append(row)
+
+    try:
+        with open(inFileName, 'r', encoding='us-ascii', newline='') as inFile:
+            reader = csv.reader(inFile, delimiter=',', quotechar='"')
+            for row in reader:
+                if row[2] in sumLvlStrs:
+                    geoCodes.append(row)
+    except:
+        with open(inFileName, 'r', encoding='iso-8859-1', newline='') as inFile:
+            reader = csv.reader(inFile, delimiter=',', quotechar='"')
+            for row in reader:
+                if row[2] in sumLvlStrs:
+                    geoCodes.append(row)
     return geoCodes
 
 
@@ -311,40 +319,78 @@ def get_all_geo_codes(geo):
     cleanGeos = SortedDict({})
 
     inFileName = os.getcwd() + "/data/2015_5yr_geo/2015_ACS_Geography_Files/g20155" + geo + ".csv"
-    with open(inFileName, 'r', newline='') as inFile:
-        reader = csv.reader(inFile, delimiter=',', quotechar='"')
-        for row in reader:
-            if row[2] == '010':
-                geoCache = [10, row[1], '', '', row[48], row[49]]
-                cleanGeos[row[4]] = geoCache
 
-            elif row[2] == '020':
-                geoCache = [20, row[1], row[6], '', row[48], row[49]]
-                cleanGeos[row[4]] = geoCache
+    try:
+        with open(inFileName, 'r', encoding='us-ascii', newline='') as inFile:
+            reader = csv.reader(inFile, delimiter=',', quotechar='"')
+            for row in reader:
+                if row[2] == '010':
+                    geoCache = [10, row[1], '', '', row[48], row[49]]
+                    cleanGeos[row[4]] = geoCache
 
-            elif row[2] == '030':
-                geoCache = [30, row[1], '', row[7], row[48], row[49]]
-                cleanGeos[row[4]] = geoCache
+                elif row[2] == '020':
+                    geoCache = [20, row[1], row[6], '', row[48], row[49]]
+                    cleanGeos[row[4]] = geoCache
 
-            elif row[2] == '040':
-                geoCache = [40, row[1], row[9], '', '', '', '', row[48], row[49]]
-                cleanGeos[row[4]] = geoCache
+                elif row[2] == '030':
+                    geoCache = [30, row[1], '', row[7], row[48], row[49]]
+                    cleanGeos[row[4]] = geoCache
 
-            elif row[2] == '050':
-                geoCache = [50, row[1], row[9], row[10], '', '', '', row[48], row[49]]
-                cleanGeos[row[4]] = geoCache
+                elif row[2] == '040':
+                    geoCache = [40, row[1], row[9], '', '', '', '', row[48], row[49]]
+                    cleanGeos[row[4]] = geoCache
 
-            elif row[2] == '160':
-                geoCache = [160, row[1], row[9], '', row[12], '', '', row[48], row[49]]
-                cleanGeos[row[4]] = geoCache
+                elif row[2] == '050':
+                    geoCache = [50, row[1], row[9], row[10], '', '', '', row[48], row[49]]
+                    cleanGeos[row[4]] = geoCache
 
-            elif row[2] == '320':
-                geoCache = [320, row[1], row[9], '', '', row[22], '', row[48], row[49]]
-                cleanGeos[row[4]] = geoCache
+                elif row[2] == '160':
+                    geoCache = [160, row[1], row[9], '', row[12], '', '', row[48], row[49]]
+                    cleanGeos[row[4]] = geoCache
 
-            elif row[2] == '500':
-                geoCache = [500, row[1], row[9], '', '', '', row[32], row[48], row[49]]
-                cleanGeos[row[4]] = geoCache
+                elif row[2] == '320':
+                    geoCache = [320, row[1], row[9], '', '', row[22], '', row[48], row[49]]
+                    cleanGeos[row[4]] = geoCache
+
+                elif row[2] == '500':
+                    geoCache = [500, row[1], row[9], '', '', '', row[32], row[48], row[49]]
+                    cleanGeos[row[4]] = geoCache
+
+    except:
+        with open(inFileName, 'r', encoding='iso-8859-1', newline='') as inFile:
+            reader = csv.reader(inFile, delimiter=',', quotechar='"')
+            for row in reader:
+                if row[2] == '010':
+                    geoCache = [10, row[1], '', '', row[48], row[49]]
+                    cleanGeos[row[4]] = geoCache
+
+                elif row[2] == '020':
+                    geoCache = [20, row[1], row[6], '', row[48], row[49]]
+                    cleanGeos[row[4]] = geoCache
+
+                elif row[2] == '030':
+                    geoCache = [30, row[1], '', row[7], row[48], row[49]]
+                    cleanGeos[row[4]] = geoCache
+
+                elif row[2] == '040':
+                    geoCache = [40, row[1], row[9], '', '', '', '', row[48], row[49]]
+                    cleanGeos[row[4]] = geoCache
+
+                elif row[2] == '050':
+                    geoCache = [50, row[1], row[9], row[10], '', '', '', row[48], row[49]]
+                    cleanGeos[row[4]] = geoCache
+
+                elif row[2] == '160':
+                    geoCache = [160, row[1], row[9], '', row[12], '', '', row[48], row[49]]
+                    cleanGeos[row[4]] = geoCache
+
+                elif row[2] == '320':
+                    geoCache = [320, row[1], row[9], '', '', row[22], '', row[48], row[49]]
+                    cleanGeos[row[4]] = geoCache
+
+                elif row[2] == '500':
+                    geoCache = [500, row[1], row[9], '', '', '', row[32], row[48], row[49]]
+                    cleanGeos[row[4]] = geoCache
 
     return cleanGeos
 
@@ -478,10 +524,17 @@ def assemble_all_states_file(alikeSeqs, EorM):
             geoCodes = []
             stateRow = []
             inFileName = os.getcwd() + "/data/2015_5yr_geo/2015_ACS_Geography_Files/g20155" + state + ".csv"
-            with open(inFileName, 'r', newline='') as inFile:
-                reader = csv.reader(inFile, delimiter=',', quotechar='"')
-                rowOne = next(reader)
-                geoCodes += [sumLvl, rowOne[1], rowOne[9], rowOne[48], rowOne[49]]
+
+            try:
+                with open(inFileName, 'r', encoding='us-ascii', newline='') as inFile:
+                    reader = csv.reader(inFile, delimiter=',', quotechar='"')
+                    rowOne = next(reader)
+                    geoCodes += [sumLvl, rowOne[1], rowOne[9], rowOne[48], rowOne[49]]
+            except:
+                with open(inFileName, 'r', encoding='iso-8859-1', newline='') as inFile:
+                    reader = csv.reader(inFile, delimiter=',', quotechar='"')
+                    rowOne = next(reader)
+                    geoCodes += [sumLvl, rowOne[1], rowOne[9], rowOne[48], rowOne[49]]
 
             summaryData = []
             if len(alikeSeqs) == 1:
