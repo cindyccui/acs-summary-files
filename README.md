@@ -4,9 +4,12 @@ A Python script that assembles large batches of American Community Survey (ACS) 
 
 ## Get Started
 1. Clone this repository to your local machine
-1. Using the repository's existing file structure, download and store the required ACS input data in the appropriate subfolders
-1. Once all inputs are downloaded and extracted, you can run the `5yr2015SummaryFileAssembler.py` script from the command line.
-1. Summary files are written to Output folder
+2. Using the repository's existing file structure, download and store the required ACS input data in the appropriate subfolders:
+* Download [the summary data](https://www2.census.gov/programs-surveys/acs/summary_file/2015/data/5_year_entire_sf/All_Geographies_Not_Tracts_Block_Groups.tar.gz) to the `acs-summary-files/2015/5-year/data/2015_5yr_All_Geographies_Not_Tracts_Block_Groups/` and extract it
+* Download [the geo codes](https://www2.census.gov/programs-surveys/acs/summary_file/2015/data/5_year_entire_sf/2015_ACS_Geography_Files.zip) to the `acs-summary-files/2015/5-year/data/2015_5yr_geo/` folder and extract it
+* For more info, see the README files in each of these folders
+3. Once all inputs are downloaded and extracted, you can run the `5yr2015SummaryFileAssembler.py` script from the command line.
+4. Summary files are written to Output folder
 
 ## Usage
 ```
